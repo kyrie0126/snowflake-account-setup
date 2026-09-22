@@ -1,0 +1,31 @@
+manifest_version: 2
+
+type: DCM_PROJECT
+
+default_target: DEV
+
+targets:
+  DEV:
+    account_identifier: DGGGORW-ISB25540
+    project_name: PLATFORM.DCM_STORAGE.DEV_LANDING_DCM
+    project_owner: DEV_ADMIN
+    templating_config: DEV_TEMPLATING
+  TEST:
+    account_identifier: DGGGORW-ISB25540
+    project_name: PLATFORM.DCM_STORAGE.TEST_LANDING_DCM
+    project_owner: TEST_ADMIN
+    templating_config: TEST_TEMPLATING
+  PROD:
+    account_identifier: DGGGORW-ISB25540
+    project_name: PLATFORM.DCM_STORAGE.PROD_LANDING_DCM
+    project_owner: PROD_ADMIN
+    templating_config: PROD_TEMPLATING
+
+templating:
+  configurations:
+    DEV_TEMPLATING:
+      database: DEV_LANDING
+    TEST_TEMPLATING:
+      database: TEST_LANDING
+    PROD_TEMPLATING:
+      database: PROD_LANDING

@@ -1,0 +1,28 @@
+name: Plan DCM objects to prod
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "sources/definitions/**"
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      SNOWFLAKE_USER: ${{ vars.PROD_DEPLOY_SNOWFLAKE_USER }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: snowflakedb/snowflake-actions/dcm/plan@v3
+        with:
+          target: PROD
+          project-path: ./
+          snowflake-user: ${{ env.SNOWFLAKE_USER }}
+          comment-on-pr: "true"
