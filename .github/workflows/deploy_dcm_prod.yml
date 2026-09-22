@@ -14,7 +14,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: test
+    environment: prod
     env:
       SNOWFLAKE_USER: ${{ vars.PROD_DEPLOY_SNOWFLAKE_USER }}
     steps:
