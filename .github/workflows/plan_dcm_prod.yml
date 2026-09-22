@@ -12,7 +12,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  deploy:
+  plan:
     runs-on: ubuntu-latest
     environment: prod
     env:
