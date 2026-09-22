@@ -1,0 +1,34 @@
+name: Deploy DCM objects to test
+
+on:
+  push:
+    branches: [test]
+    paths:
+      - "sources/definitions/**"
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: test
+    env:
+      SNOWFLAKE_USER: ${{ vars.TEST_DEPLOY_SNOWFLAKE_USER }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: snowflakedb/snowflake-actions/dcm/plan@v3
+        with:
+          target: TEST
+          project-path: ./
+          snowflake-user: ${{ env.SNOWFLAKE_USER }}
+
+      - uses: snowflakedb/snowflake-actions/dcm/deploy@v3
+        with:
+          target: TEST
+          project-path: ./
+          snowflake-user: ${{ env.SNOWFLAKE_USER }}
+          comment-on-pr: "true"
